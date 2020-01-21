@@ -1,0 +1,27 @@
+	#### Secuencias mitocondriales de Mus musculus
+                        #Diego MV 2020
+
+### Crear el directorio "secs_mus_musculus"
+mkdir secs_mus_musculus
+
+### Bajar las secuencias del NCBI
+# Debe saberse el ID de cada secuencia
+# El número de ID se coloca en la lista del loop 
+
+for i in 17724 17735 17716 17733 17737; do curl -s "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=nucleotide&rettype=fasta&id=$i" > secs_mus_musculus/SecID_$i.fasta; done
+
+### Contar el número de veces que aparece la secuencia "TGCA" en cada secuencia bajada
+# Nuevamente se colocan enlistados los IDs en el loop
+# NOTA: se colocan en el mismo orden en que se colocaron anteriormente al bajar los datos  
+
+for i in 17724 17735 17716 17733 17737; do echo "En el gen con ID $i la secuencia TGCA se repite"; grep -c TGCA secs_mus_musculus/SecID_$i.fasta; done
+
+### Enviar lo observado en la terminal a un archivo de texto 
+# El archivo se llamará "sec_TGCA_in_secsIDs.txt" y estará en la carpeta "secs_mus_musculus"
+
+for i in 17724 17735 17716 17733 17737; do echo "En el gen con ID $i la secuencia TGCA se repite"; grep -c TGCA secs_mus_musculus/SecID_$i.fasta; done > secs_mus_musculus/sec_TGCA_in_secsIDs.txt
+
+
+
+
+
